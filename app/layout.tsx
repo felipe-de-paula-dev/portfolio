@@ -1,19 +1,21 @@
-import type { Metadata } from 'next'
-import './globals.css'
+// app/layout.tsx
+import './globals.css';
+import { ThemeProvider } from 'next-themes';
+import App from './page';
 
-export const metadata: Metadata = {
-  title: 'Felipe Portfólio',
-  description: 'Criado Por Felipe',
-}
+export const metadata = {
+  title: 'Meu Site',
+  description: 'Descrição do site',
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-br">
-      <body>{children}</body>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body>
+        <ThemeProvider attribute="class">
+         <App/>
+        </ThemeProvider>
+      </body>
     </html>
-  )
+  );
 }

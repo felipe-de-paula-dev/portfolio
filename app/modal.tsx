@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import { Github, XCircle } from 'lucide-react';
 import { DashboardDemo, TodoDemo, AuthDemo } from './demo';
 

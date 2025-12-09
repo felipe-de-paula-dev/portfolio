@@ -1,26 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { Mail, ExternalLink, Play, CheckCircle, BarChart, Lock, Terminal as TerminalIcon } from 'lucide-react';
-import Navbar from './components/Navbar';
-import Terminal from './components/terminal';
-import DemoModal from './components/modal';
+import Navbar from './Navbar';
+import Terminal from './terminal';
+import DemoModal from './modal';
+import { useTheme } from 'next-themes';
+
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(true); 
+  const { theme, setTheme } = useTheme();
   const [activeDemo, setActiveDemo] = useState<any>(null);
-
-  const toggleTheme = () => {
-    setDarkMode(!darkMode);
-  };
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
 
   const skillCategories = [
     {
@@ -84,19 +74,23 @@ const App = () => {
   };
 
   return (
-    <div>
+  <div>
   <div className="min-h-screen transition-colors duration-300 bg-gray-50 dark:bg-[#0f172a] text-slate-800 dark:text-slate-200 font-sans selection:bg-indigo-500 selection:text-white">
-        <Navbar toggleTheme={toggleTheme} darkMode={darkMode} scrollToSection={scrollToSection} />
+        <Navbar scrollToSection={scrollToSection} />
 
         {/* Hero Section */}
         <section id="resumo" className="pt-32 pb-20 px-4 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
           <div className="flex-1 space-y-6">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-300 text-xs font-bold uppercase tracking-wide border border-indigo-100 dark:border-indigo-500/20">
+            
+        <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+          Toggle Theme
+        </button>
+        <div className="inline-flex items-center px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-300 text-xs font-bold uppercase tracking-wide border border-indigo-100 dark:border-indigo-500/20">
               Disponível para Projetos
             </div>
             <h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white leading-tight">
               Criando soluções <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">digitais robustas</span>.
+              <span className="text-transparent bg-clip-text bg-gradient-to-r  from-indigo-500 to-purple-600">digitais robustas</span>.
             </h1>
             <p className="text-lg text-slate-600 dark:text-slate-400 max-w-lg">
               Especialista em transformar requisitos complexos em software limpo, escalável e centrado no usuário.
@@ -190,7 +184,7 @@ const App = () => {
           <div className="max-w-2xl mx-auto px-4 relative z-10">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">Pronto para começar?</h2>
             <p className="text-indigo-200 text-lg mb-10">Seja para um projeto freelance, uma vaga full-time ou apenas um café virtual.</p>
-            <a href="mailto:email@exemplo.com" className="inline-flex items-center gap-3 px-8 py-4 bg-white text-indigo-900 rounded-full font-bold hover:bg-indigo-50 transition-all transform hover:scale-105 text-slate-900">
+            <a href="mailto:email@exemplo.com" className="inline-flex items-center gap-3 px-8 py-4 bg-white  rounded-full font-bold hover:bg-indigo-50 transition-all transform hover:scale-105 text-slate-900">
               <Mail className="w-5 h-5"/> Entrar em Contato
             </a>
           </div>
