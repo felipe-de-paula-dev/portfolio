@@ -20,7 +20,7 @@ const Navbar = ({ scrollToSection }: { scrollToSection: (id: string) => void }) 
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('home')}>
             <Code2 className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
-            <span className="font-bold text-xl tracking-tight text-slate-900 dark:text-white">DevPortfólio</span>
+            <span className="font-bold text-xl tracking-tight text-slate-900 dark:text-white">Felipe De Paula</span>
           </div>
 
           {/* Desktop */}
@@ -29,7 +29,6 @@ const Navbar = ({ scrollToSection }: { scrollToSection: (id: string) => void }) 
             <button onClick={() => scrollToSection('habilidades')} className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-colors">Stack</button>
             <button onClick={() => scrollToSection('projetos')} className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-colors">Projetos</button>
             <button onClick={() => scrollToSection('contato')} className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-colors">Contato</button>
-
             <button 
               onClick={() => theme == 'dark' ? setTheme('light') : setTheme('dark')} 
               className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
@@ -41,11 +40,12 @@ const Navbar = ({ scrollToSection }: { scrollToSection: (id: string) => void }) 
 
           {/* Mobile */}
           <div className="md:hidden flex items-center gap-4">
-            <button
-              className="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            <button 
+              onClick={() => theme == 'dark' ? setTheme('light') : setTheme('dark')} 
+              className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
+              aria-label="Alternar Tema"
             >
-              <Sun className={`h-5 w-5 absolute inset-0 transition-all duration-500`}/>
-              <Moon className={`h-5 w-5 absolute inset-0 transition-all duration-500`}/>
+              {theme == 'light' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
             <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-slate-600 dark:text-slate-400">
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
