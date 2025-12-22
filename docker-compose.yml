@@ -4,9 +4,12 @@ services:
   next:
     build: .
     container_name: next-app
-    ports:
-      - "3000:3000"
     environment:
       NODE_ENV: production
+    ports:
+      - "3000:3000"
     restart: unless-stopped
 
+networks:
+  web_network:
+    external: true
