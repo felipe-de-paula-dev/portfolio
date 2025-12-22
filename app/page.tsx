@@ -1,17 +1,19 @@
 'use client';
 
 import {  useState } from 'react';
-import { Mail, ExternalLink, Play, CheckCircle, BarChart, Lock, Terminal as TerminalIcon, Circle, Coffee } from 'lucide-react';
+import { Mail, ExternalLink, Play, CheckCircle, BarChart, Lock, Terminal as TerminalIcon, Circle, Coffee, Layout } from 'lucide-react';
 import Navbar from './Navbar';
 import Terminal from './terminal';
 import DemoModal from './modal';
 import { FaAngular, FaAws, FaDatabase, FaDocker, FaGit, FaGitAlt, FaGithub, FaJava, FaNodeJs, FaReact } from 'react-icons/fa';
 import { SiExpress, SiFastify, SiMysql, SiNestjs, SiNextdotjs, SiPostgresql, SiSpringboot, SiTailwindcss, SiTypescript } from 'react-icons/si';
-import { IoLogoJavascript } from 'react-icons/io';
+import { Github, Code2, Palette } from 'lucide-react';
 
 
 const App = () => {
   const [activeDemo, setActiveDemo] = useState<any>(null);
+  const [repositorioUrl, setRepositorioUrl] = useState<string>('');
+  const [demoUrl, setDemoUrl] = useState<string>('');
 
  const skillCategories = [
   {
@@ -46,48 +48,78 @@ const App = () => {
       { name: "Docker", icon: <FaDocker color="#2496ED" /> },
       { name: "AWS", icon: <FaAws color="#FF9900" /> },
       { name: "Git", icon: <FaGitAlt color="#F05032" /> },
-      { name: "GitHub", icon: <FaGithub color="#696969" /> },
     ],
   },
 ];
 
-  // Dados dos Projetos
   const projects = [
     {
       id: 1,
-      title: "Dashboard Financeiro",
-      description: "Painel de análise de dados com gráficos interativos e relatórios em tempo real.",
-      tech: ["React", "Recharts", "Tailwind"],
-      demoType: "dashboard",
-      color: "bg-blue-500"
+      title: "FindIt – Dashboard Administrativo",
+      description: "Painel de controle robusto para gerenciamento de inventário, controle de status de itens e análise de dados para operações de achados e perdidos.",
+      image: "findIt.png", 
+      tech: [
+        { name: "Node.js", icon: <FaNodeJs color='#339933' /> },
+        { name: "Docker", icon: <FaDocker color="#2496ED" /> },
+        { name: "Git", icon: <FaGitAlt color="#F05032" /> },
+        { name: "MySQL", icon: <SiMysql color="#4479A1" /> },
+        { name: "TypeScript", icon: <SiTypescript color='#1E90FF'/> },
+        { name: "Tailwind CSS", icon: <SiTailwindcss color='#1874CD' /> },
+        { name: "React.js", icon: <FaReact color='#1E90FF'/> },
+      ],
+      links: {
+        github: "https://github.com/felipe-de-paula-dev/findIt",
+        live: "https://findit.felipedepauladev.site"
+      },
+      color: "from-red-500 to-purple-500" 
     },
     {
       id: 2,
-      title: "Task Master App",
-      description: "Gerenciador de tarefas produtivo com estado local e persistência de dados.",
-      tech: ["React", "LocalStorage", "CSS Modules"],
-      demoType: "todo",
-      color: "bg-green-500"
+      title: "FindIt – Portal do Usuário",
+      description: "Interface intuitiva dedicada à busca e recuperação de itens perdidos, permitindo que usuários visualizem objetos encontrados em tempo real com filtros avançados.",
+      image: "findItUsr.png", 
+      tech: [
+        { name: "Node.js", icon: <FaNodeJs color='#339933' /> },
+        { name: "Docker", icon: <FaDocker color="#2496ED" /> },
+        { name: "Git", icon: <FaGitAlt color="#F05032" /> },
+        { name: "MySQL", icon: <SiMysql color="#4479A1" /> },
+        { name: "TypeScript", icon: <SiTypescript color='#1E90FF'/> },
+        { name: "Tailwind CSS", icon: <SiTailwindcss color='#1874CD' /> },
+        { name: "React.js", icon: <FaReact color='#1E90FF'/> },
+      ],
+      links: {
+        github: "https://github.com/felipe-de-paula-dev/findIt",
+        live: "https://findit-user.felipedepauladev.site"
+      },
+      color: "from-red-500 to-orange-500" 
     },
     {
       id: 3,
-      title: "Auth System API",
-      description: "Sistema completo de autenticação e autorização com criptografia de ponta.",
-      tech: ["Node.js", "JWT", "Express"],
-      demoType: "auth",
-      color: "bg-purple-500"
+      title: "Sistema para Pequenos Comercios",
+      description: "Sistema completo para gestão de pequenos comércios, incluindo controle de estoque, vendas e relatórios financeiros.",
+      image: "mercado.png", 
+      tech: [
+        { name: "Spring Boot", icon: <SiSpringboot color='#6DB33F'/> },
+        { name: "Docker", icon: <FaDocker color="#2496ED" /> },
+        { name: "Git", icon: <FaGitAlt color="#F05032" /> },
+        { name: "TypeScript", icon: <SiTypescript color='#1E90FF'/> },
+        { name: "Tailwind CSS", icon: <SiTailwindcss color='#1874CD' /> },
+        { name: "Angular", icon: <FaAngular color='#DD0031'/> },
+        { name: "PostgreSQL", icon: <SiPostgresql color="#336791" /> },
+      ],
+      links: {
+        github: "https://github.com/felipe-de-paula-dev/SistemaMercado",
+        live: "https://mercado.felipedepauladev.site"
+      },
+      color: "from-blue-500 to-cyan-500" 
     },
-    {
-      id: 4,
-      title: "Landing Page Startup",
-      description: "Página institucional de alta conversão, responsiva e otimizada para SEO.",
-      tech: ["HTML5", "CSS3", "JavaScript"],
-      demoType: "landing",
-      color: "bg-orange-500"
-    }
   ];
 
-  const openDemo = (project: any) => setActiveDemo(project);
+  const openDemo = (project: any) => {
+    setActiveDemo(project);
+    setRepositorioUrl(project.links.github);
+    setDemoUrl(project.links.live); 
+  };
   const closeDemo = () => setActiveDemo(null);
 
   const scrollToSection = (id: any) => {
@@ -197,36 +229,75 @@ const App = () => {
               <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Projetos Recentes</h2>
               <p className="text-slate-600 dark:text-slate-400">Clique em "Testar Demo" para interagir com o projeto.</p>
             </div>
-            <a href="#" className="text-indigo-600 dark:text-indigo-400 font-medium hover:underline flex items-center gap-1">
+            <a href="https://github.com/felipe-de-paula-dev" target='_blank' className="text-indigo-600 dark:text-indigo-400 font-medium hover:underline flex items-center gap-1">
               Ver GitHub Completo <ExternalLink className="w-4 h-4"/>
             </a>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project) => (
-              <div key={project.id} className="group bg-white dark:bg-slate-800 rounded-2xl p-1 border border-slate-100 dark:border-slate-700 hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
-                <div className={`h-48 rounded-xl ${project.color} bg-opacity-10 dark:bg-opacity-20 flex items-center justify-center relative overflow-hidden`}>
-                   <div className={`absolute w-32 h-32 rounded-full ${project.color} opacity-20 blur-2xl -top-10 -right-10`}></div>
-                   <div className={`absolute w-24 h-24 rounded-full ${project.color} opacity-20 blur-xl bottom-0 left-0`}></div>
-                   <button onClick={() => openDemo(project)} className="z-10 bg-white dark:bg-slate-900 text-slate-900 dark:text-white px-6 py-3 rounded-full font-bold shadow-lg transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex items-center gap-2 cursor-pointer">
-                     <Play className="w-4 h-4 fill-current" /> Testar Demo
-                   </button>
-                   <div className="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-30 transition-opacity">
-                      {project.demoType === 'dashboard' && <BarChart className={`w-16 h-16 ${project.color.replace('bg-', 'text-')}`} />}
-                      {project.demoType === 'todo' && <CheckCircle className={`w-16 h-16 ${project.color.replace('bg-', 'text-')}`} />}
-                      {project.demoType === 'auth' && <Lock className={`w-16 h-16 ${project.color.replace('bg-', 'text-')}`} />}
-                      {project.demoType === 'landing' && <TerminalIcon className={`w-16 h-16 ${project.color.replace('bg-', 'text-')}`} />}
-                   </div>
-                </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">{project.title}</h3>
-                  <p className="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed flex-1">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map((t, i) => (
-                      <span key={i} className="text-xs font-mono px-2 py-1 bg-slate-100 dark:bg-slate-900 rounded text-slate-600 dark:text-slate-400">{t}</span>
-                    ))}
+              <div 
+                key={project.id} 
+                className={`group p-[2px] rounded-2xl bg-gradient-to-br ${project.color} hover:shadow-2xl transition-all duration-300 flex flex-col h-full`}
+              >
+                <div className="bg-white dark:bg-slate-800 rounded-[calc(1rem-2px)] p-2 flex flex-col h-full w-full">
+                  <div className="h-48 rounded-xl relative overflow-hidden bg-slate-100 dark:bg-slate-900">
+                    {project.image ? (
+                      <img 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className={`w-full h-full bg-gradient-to-br ${project.color} relative flex items-center justify-center`}>
+                        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px]"></div>
+                        <div className="relative z-10 opacity-50 group-hover:scale-110 transition-transform duration-500">
+                          <Layout className="w-16 h-16 text-white" />
+                        </div>
+                      </div>
+                    )}
+                    
+                    <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 z-20">
+                      {project.links.live && (
+                        <a href={project.links.live} target="_blank" rel="noreferrer" className="p-3 bg-white rounded-full text-slate-900 hover:scale-110 transition-transform">
+                          <ExternalLink className="w-5 h-5" />
+                        </a>
+                      )}
+                      {project.links.github && (
+                        <a href={project.links.github} target="_blank" rel="noreferrer" className="p-3 bg-white rounded-full text-slate-900 hover:scale-110 transition-transform">
+                          <Github className="w-5 h-5" />
+                        </a>
+                      )}
+                    </div>
                   </div>
-                  <button onClick={() => openDemo(project)} className="w-full py-3 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Ver Detalhes</button>
+
+                  <div className="p-5 flex-1 flex flex-col">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className={`text-xl font-bold text-slate-900 dark:text-white transition-all duration-300 group-hover:bg-gradient-to-r ${project.color} group-hover:bg-clip-text group-hover:text-transparent`}>
+                        {project.title}
+                      </h3>
+                    </div>
+                    
+                    <p className="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed flex-1">
+                      {project.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tech.map((t, i) => (
+                        <span key={i} className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-bold px-2.5 py-1 bg-slate-100 dark:bg-slate-700 rounded-md text-slate-600 dark:text-slate-300">
+                          {t.icon}
+                          {t.name}
+                        </span>
+                      ))}
+                    </div>
+
+                    <button 
+                      onClick={() => openDemo(project)} 
+                      className={`w-full py-3 rounded-lg bg-gradient-to-r ${project.color} text-white font-bold hover:brightness-110 transition-all flex items-center justify-center gap-2 active:scale-95`}
+                    >
+                      <Play className="w-4 h-4 fill-current" /> Ver Demo Online
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -249,7 +320,7 @@ const App = () => {
         </footer>
       </div>
 
-      <DemoModal activeDemo={activeDemo} closeDemo={closeDemo} />
+      <DemoModal activeDemo={activeDemo} closeDemo={closeDemo} repositorioUrl={repositorioUrl} demoUrl={demoUrl} />
     </div>
   );
 };

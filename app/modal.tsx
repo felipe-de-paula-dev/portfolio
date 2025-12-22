@@ -3,14 +3,13 @@
 import { Github, XCircle } from 'lucide-react';
 import { DashboardDemo, TodoDemo, AuthDemo } from './demo';
 
-const DemoModal = ({ activeDemo, closeDemo }: any) => {
+const DemoModal = ({ activeDemo, closeDemo, repositorioUrl, demoUrl }: any) => {
   if (!activeDemo) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
       <div className="bg-white dark:bg-slate-900 w-full max-w-4xl h-[600px] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
         
-        {/* Modal Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50">
           <div className="flex items-center gap-3">
             <div className={`w-3 h-3 rounded-full ${activeDemo.color}`}></div>
@@ -21,28 +20,29 @@ const DemoModal = ({ activeDemo, closeDemo }: any) => {
           </button>
         </div>
 
-        {/* Modal Body */}
         <div className="flex-1 flex overflow-hidden">
-          {/* Sidebar Info */}
           <div className="w-1/3 p-6 bg-slate-50 dark:bg-[#0b1121] border-r border-slate-100 dark:border-slate-800 hidden md:block overflow-y-auto">
             <h4 className="font-bold text-slate-900 dark:text-white mb-2">Sobre o Projeto</h4>
             <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">{activeDemo.description}</p>
             
             <h4 className="font-bold text-slate-900 dark:text-white mb-2">Tecnologias</h4>
             <ul className="space-y-2 mb-6">
-              {activeDemo.tech.map((t: string) => (
-                <li key={t} className="text-sm text-slate-600 dark:text-slate-400 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span> {t}
-                </li>
-              ))}
+              {activeDemo.tech.map((t: any, index: number) => (
+              <li 
+                key={t.name || index} 
+                className="text-sm text-slate-600 dark:text-slate-400 flex items-center gap-2"
+              >
+                <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span> 
+                {typeof t === 'object' ? t.name : t}
+              </li>
+            ))}
             </ul>
 
-            <a href="#" className="flex items-center gap-2 text-sm text-indigo-600 dark:text-indigo-400 hover:underline">
+            <a href={repositorioUrl} target='_blank' className="flex items-center gap-2 text-sm text-indigo-600 dark:text-indigo-400 hover:underline">
               <Github className="w-4 h-4" /> Ver Repositório
             </a>
           </div>
 
-          {/* Demo Area */}
           <div className="flex-1 p-8 bg-slate-100 dark:bg-black/20 flex items-center justify-center relative">
              <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1f2937_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
              <div className="w-full max-w-md bg-white dark:bg-slate-800 rounded-xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700 z-10">
@@ -52,18 +52,8 @@ const DemoModal = ({ activeDemo, closeDemo }: any) => {
                   <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
                 </div>
                 
-                <div className="h-80 overflow-y-auto relative">
-                  {activeDemo.demoType === 'dashboard' && <DashboardDemo />}
-                  {activeDemo.demoType === 'todo' && <TodoDemo />}
-                  {activeDemo.demoType === 'auth' && <AuthDemo />}
-                  {activeDemo.demoType === 'landing' && (
-                    <div className="flex items-center justify-center h-full text-center p-6">
-                      <div>
-                        <p className="font-bold text-slate-800 dark:text-white">Landing Page Estática</p>
-                        <p className="text-xs text-slate-500 mt-2">Este projeto é focado em layout. Imagine aqui um site incrível!</p>
-                      </div>
-                    </div>
-                  )}
+                <div className="h-80 relative overflow-hidden">
+                  <iframe src={demoUrl} className="w-full h-full zoom-30"></iframe>
                 </div>
              </div>
           </div>

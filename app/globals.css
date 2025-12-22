@@ -6,3 +6,18 @@ body {
   background-color: var(--background);
   color: var(--foreground);
 }
+
+
+.zoom-30 {
+  /* Faz o site pensar que tem muito espaço (100% / 0.3 = 333%) */
+  width: 333.33% !important; 
+  height: 333.33% !important;
+  
+  /* Reduz visualmente para 30% */
+  transform: scale(0.3);
+  
+  /* Fixa o redimensionamento no canto superior esquerdo */
+  transform-origin: 0 0;
+  
+  border: none;
+}
