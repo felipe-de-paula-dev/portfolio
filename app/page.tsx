@@ -308,15 +308,15 @@ const App = () => {
         <section id="contato" className="py-24 bg-indigo-900 dark:bg-black text-white text-center relative overflow-hidden transition-colors animate-300">
           <div className="max-w-2xl mx-auto px-4 relative z-10">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">Pronto para começar?</h2>
-            <p className="text-indigo-200 text-lg mb-10">Seja para um projeto freelance, uma vaga full-time ou apenas um café virtual.</p>
-            <a href="mailto:email@exemplo.com" className="inline-flex items-center gap-3 px-8 py-4 bg-white  rounded-full font-bold hover:bg-indigo-50 transition-all transform hover:scale-105 text-slate-900">
-              <Mail className="w-5 h-5"/> Entrar em Contato
+            <p className="text-indigo-200 text-lg mb-10">Seja para um projeto freelance, uma vaga full-time ou apenas um bate papo.</p>
+            <a href="mailto:feliped137@gmail.com" className="inline-flex items-center gap-3 px-8 py-4 bg-white  rounded-full font-bold hover:bg-indigo-50 transition-all transform hover:scale-105 text-slate-900">
+              <Mail className="w-5 h-5"/> Entrar em Contato 
             </a>
           </div>
         </section>
 
         <footer className="py-8 bg-slate-900 text-slate-500 text-center text-sm border-t border-slate-800">
-          <p>© {new Date().getFullYear()} Desenvolvido com React & Tailwind.</p>
+          <p>© {new Date().getFullYear()} Desenvolvido por Felipe De Paula.</p>
         </footer>
       </div>
 
