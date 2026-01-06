@@ -8,6 +8,8 @@ import DemoModal from './modal';
 import { FaAngular, FaAws, FaDatabase, FaDocker, FaGit, FaGitAlt, FaGithub, FaJava, FaNodeJs, FaReact } from 'react-icons/fa';
 import { SiExpress, SiFastify, SiMysql, SiNestjs, SiNextdotjs, SiPostgresql, SiSpringboot, SiTailwindcss, SiTypescript } from 'react-icons/si';
 import { Github, Code2, Palette } from 'lucide-react';
+import Banner from './banner';
+import { scrollToSection } from './utils/utils';
 
 
 const App = () => {
@@ -122,47 +124,13 @@ const App = () => {
   };
   const closeDemo = () => setActiveDemo(null);
 
-  const scrollToSection = (id: any) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
   <div>
   <div className="min-h-screen transition-colors duration-300 bg-gray-50 dark:bg-[#0f172a] text-slate-800 dark:text-slate-200 font-sans selection:bg-indigo-500 selection:text-white">
         <Navbar scrollToSection={scrollToSection} />
 
-        {/* Hero Section */}
-        <section id="resumo" className="pt-32 pb-20 px-4 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
-          <div className="flex-1 space-y-6">
-            <div className="flex w-[190px] justify-center gap-2 items-center transition-colors animate-300 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-300 text-xs font-bold uppercase tracking-wide border border-indigo-100 dark:border-indigo-500/20">
-              <Circle className='fill-green-400 text-green-400' size={12}/>
-              Online & Coding
-              <Coffee size={14} />
-            </div> 
-            <h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white leading-tight">
-              Criando soluções <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r  from-indigo-500 to-purple-600">digitais robustas</span>.
-            </h1>
-            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-lg">
-              Especialista em transformar requisitos complexos em software limpo, escalável e centrado no usuário.
-            </p>
-            <div className="flex gap-4 pt-2">
-              <button onClick={() => scrollToSection('projetos')} className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/20">Ver Portfólio</button>
-              <button onClick={() => scrollToSection('contato')} className="px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Contato</button>
-            </div>
-          </div>
-          
-          <div className="flex-1 flex justify-center relative">
-            <div className="absolute top-10 right-10 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-10 left-10 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl"></div>
-            <Terminal />
-          </div>
-        </section>
+        <Banner />
 
-        {/* Tech Stack - CORRIGIDO */}
         <section id="habilidades" className="py-20 bg-white dark:bg-[#131c31] border-y border-slate-100 dark:border-slate-800/50 transition-colors duration-300">
           <div className="max-w-4xl mx-auto px-4">
             <div className="text-center mb-16">
